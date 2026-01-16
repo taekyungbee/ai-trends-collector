@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model TrendVideo {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar(500)
+  link      String   @unique @db.VarChar(1000)
+  pubDate   DateTime @map("pub_date") @db.Timestamptz(6)
+  source    String   @db.VarChar(100)
+  thumbnail String?  @db.VarChar(1000)
+  summary   String?  @db.Text
+  emailSent Boolean  @default(false) @map("email_sent")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@index([pubDate(sort: Desc)], map: "idx_trend_videos_pub_date")
+  @@index([emailSent], map: "idx_trend_videos_email_sent")
+  @@map("trend_videos")
+}
+
+model TrendNews {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar(500)
+  link      String   @unique @db.VarChar(1000)
+  pubDate   DateTime @map("pub_date") @db.Timestamptz(6)
+  source    String   @db.VarChar(100)
+  summary   String?  @db.Text
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@index([pubDate(sort: Desc)], map: "idx_trend_news_pub_date")
+  @@map("trend_news")
+}
+
+model YouTubeChannel {
+  id        Int      @id @default(autoincrement())
+  channelId String   @unique @map("channel_id") @db.VarChar(30)
+  name      String   @db.VarChar(100)
+  category  String   @default("korean") @db.VarChar(20) // korean, global
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@index([active], map: "idx_youtube_channels_active")
+  @@index([category], map: "idx_youtube_channels_category")
+  @@map("youtube_channels")
+}

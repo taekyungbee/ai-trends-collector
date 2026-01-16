@@ -1,0 +1,44 @@
+{
+  "name": "ai-trends-collector",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI Trends 수집/요약/발송 백엔드 서비스",
+  "scripts": {
+    "dev": "next dev -p 7001",
+    "build": "prisma generate && next build",
+    "start": "next start -p 7001",
+    "lint": "eslint",
+    "type-check": "tsc --noEmit",
+    "db:pull": "prisma db pull",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push"
+  },
+  "dependencies": {
+    "@distube/ytdl-core": "^4.16.12",
+    "@google/generative-ai": "^0.24.1",
+    "@notionhq/client": "^5.6.0",
+    "@prisma/adapter-pg": "^7.2.0",
+    "@prisma/client": "^7.2.0",
+    "dotenv": "^17.2.3",
+    "next": "16.0.10",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^7.0.12",
+    "pg": "^8.16.3",
+    "prisma": "^7.2.0",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
+    "rss-parser": "^3.13.0",
+    "youtubei.js": "^16.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/node-cron": "^3.0.11",
+    "@types/nodemailer": "^7.0.4",
+    "@types/pg": "^8.16.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.10",
+    "typescript": "^5"
+  }
+}
